@@ -1,5 +1,6 @@
 package se.sciion.GBT.nodes;
 
+
 import se.sciion.GBT.BehaviorStatus;
 import se.sciion.GBT.Mutatable;
 import se.sciion.GBT.Prototype;
@@ -7,6 +8,7 @@ import se.sciion.GBT.Prototype;
 public abstract class BehaviorNode implements Mutatable, Prototype{
 
 	protected BehaviorStatus status;
+	protected BehaviorNode parent;
 	
 	public BehaviorNode() {
 		status = BehaviorStatus.UNDEFINED;
@@ -35,5 +37,13 @@ public abstract class BehaviorNode implements Mutatable, Prototype{
 		return status;
 	}
 	
+	// Get parent node, useful for sub-tree crossover.
+	public BehaviorNode getParent(){
+		return parent;
+	}
+	
+	public void setParent(BehaviorNode parent){
+		this.parent = parent;
+	}
 	
 }

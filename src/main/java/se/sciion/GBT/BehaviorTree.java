@@ -14,12 +14,16 @@ public class BehaviorTree {
 		return root.tick();
 	}
 
-	public BehaviorTree clone() {
+	public BehaviorTree prototype() {
 		return new BehaviorTree(root.prototype());
 	}
 	
 	public void mutate(){
 		root.mutate();
+	}
+	
+	public void crossover(BehaviorTree tree){
+		
 	}
 	
 
