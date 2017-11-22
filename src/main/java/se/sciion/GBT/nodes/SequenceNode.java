@@ -36,10 +36,10 @@ public class SequenceNode extends CompositeNode{
 	}
 
 	@Override
-	public BehaviorNode prototype() {
+	public BehaviorNode replicate() {
 		List<BehaviorNode> nodes = new ArrayList<BehaviorNode>();
 		for(BehaviorNode n: children){
-			nodes.add(n.prototype());
+			nodes.add(n.replicate());
 		}
 		return new SequenceNode(nodes);
 	}

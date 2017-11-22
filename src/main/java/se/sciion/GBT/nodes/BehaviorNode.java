@@ -1,14 +1,16 @@
 package se.sciion.GBT.nodes;
 
+import java.util.List;
 
 import se.sciion.GBT.BehaviorStatus;
 import se.sciion.GBT.Mutatable;
 import se.sciion.GBT.Prototype;
 
 public abstract class BehaviorNode implements Mutatable, Prototype{
-
+	
 	protected BehaviorStatus status;
-	protected BehaviorNode parent;
+	private BehaviorNode parent;
+	protected static int DEPTH_PRINT = 0;
 	
 	public BehaviorNode() {
 		status = BehaviorStatus.UNDEFINED;
@@ -46,4 +48,20 @@ public abstract class BehaviorNode implements Mutatable, Prototype{
 		this.parent = parent;
 	}
 	
+	/**
+	 * Flattens the tree such that crossover can be done easier.
+	 * @param nodes array where the nodes will be stored
+	 */
+	public void getNodes(List<BehaviorNode> nodes) {
+		nodes.add(this);
+	}
+	
+	@Override
+	public String toString() {
+		String s = "";
+		for(int i = 0; i < DEPTH_PRINT; i++) {
+			s += "-";
+		}
+		return s + getClass().getSimpleName() + "\n";
+	}
 }

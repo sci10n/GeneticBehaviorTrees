@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class CompositeNode extends BehaviorNode{
+public abstract class CompositeNode extends BehaviorNode {
 
 	protected List<BehaviorNode> children;
 	
@@ -16,7 +16,7 @@ public abstract class CompositeNode extends BehaviorNode{
 		currentChild = 0;
 		
 		for(BehaviorNode node: children){
-			node.parent = this;
+			node.setParent(this);
 		}
 	}
 	
@@ -26,8 +26,25 @@ public abstract class CompositeNode extends BehaviorNode{
 		currentChild = 0;
 		
 		for(BehaviorNode node: children){
-			node.parent = this;
+			node.setParent(this);
 		}
+	}
+	
+	public void addChild(BehaviorNode node){
+		children.add(node);
+		node.setParent(this);
+	}
+	
+	public void removeChild(BehaviorNode node) {
+		children.remove(node);
+		node.setParent(null);
+	}
+	
+	public void replaceChild(BehaviorNode n1, BehaviorNode n2) {
+		int indx = children.indexOf(n1);
+		children.set(indx, n2);
+		n1.setParent(null);
+		n2.setParent(this);
 	}
 	
 	@Override
@@ -45,5 +62,30 @@ public abstract class CompositeNode extends BehaviorNode{
 		for(BehaviorNode node: children){
 			node.mutate();
 		}
+	}
+	
+	@Override
+	public void getNodes(List<BehaviorNode> nodes) {
+		nodes.add(this);
+		for(BehaviorNode c: children) {
+			c.getNodes(nodes);
+		}
+	}
+	
+	@Override
+	public String toString() {
+		String s = "";
+		for(int i = 0; i < DEPTH_PRINT; i++) {
+			s += "-";
+		}
+		
+		s += getClass().getSimpleName() + "\n";
+		
+		DEPTH_PRINT += 1;
+		for(BehaviorNode c: children) {
+			s += c.toString();
+		}
+		DEPTH_PRINT -= 1;
+		return s;
 	}
 }

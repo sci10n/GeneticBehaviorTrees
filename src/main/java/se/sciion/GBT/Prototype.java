@@ -7,8 +7,8 @@ import se.sciion.GBT.nodes.BehaviorNode;
  * @author sciion
  *
  */
-public interface Prototype {
+public interface Prototype{
 
 	// Renamed from clone because eclipse wouldn't allow clone.
-	public BehaviorNode prototype();
+	public BehaviorNode replicate();
 }

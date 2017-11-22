@@ -1,5 +1,3 @@
-package tests;
-
 import static org.junit.Assert.assertTrue;
 
 import java.io.StringWriter;
@@ -16,8 +14,8 @@ import se.sciion.GBT.BehaviorTree;
 import se.sciion.GBT.Prototypes;
 import se.sciion.GBT.nodes.BehaviorNode;
 import se.sciion.GBT.nodes.SelectorNode;
-import tests.nodes.FailNode;
-import tests.nodes.SuccessNode;
+import nodes.FailNode;
+import nodes.SuccessNode;
 
 public class LibraryTest {
     @Test public void testBasicTreeConstruction() {
@@ -29,6 +27,8 @@ public class LibraryTest {
     	SelectorNode selector = new SelectorNode(fail,success);
     	BehaviorTree successTree = new BehaviorTree(selector);
     			
+    	System.out.println(successTree.toString());
+    	
     	assertTrue("Basic tree return success", successTree.tick() == BehaviorStatus.SUCCESS);
     	
     	BehaviorTree failTree = new BehaviorTree(new SelectorNode(fail,fail));

@@ -28,8 +28,8 @@ public class InverterNode extends DecoratorNode{
 	}
 
 	@Override
-	public BehaviorNode prototype() {
-		return new InverterNode(child.prototype());
+	public BehaviorNode replicate() {
+		return new InverterNode(child.replicate());
 	}
 
 }

@@ -1,4 +1,4 @@
-package tests.nodes;
+package nodes;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -6,22 +6,22 @@ import se.sciion.GBT.BehaviorStatus;
 import se.sciion.GBT.nodes.BehaviorNode;
 
 @XmlRootElement
-public class FailNode extends BehaviorNode{
+public final class SuccessNode extends BehaviorNode{
 
+	// No mutate available
 	@Override
 	public void mutate() {
 		
 	}
 
 	@Override
-	public BehaviorNode prototype() {
-		return new FailNode();
+	public BehaviorNode replicate() {
+		return new SuccessNode();
 	}
 
 	@Override
 	protected BehaviorStatus onUpdate() {
-		status = BehaviorStatus.FAILURE;
+		status = BehaviorStatus.SUCCESS;
 		return status;
 	}
-
 }

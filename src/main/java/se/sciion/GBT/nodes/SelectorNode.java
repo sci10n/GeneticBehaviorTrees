@@ -15,7 +15,6 @@ public class SelectorNode extends CompositeNode{
 		super(nodes);
 	}
 
-
 	@Override
 	protected BehaviorStatus onUpdate() {
 		// Nothing to do
@@ -36,14 +35,13 @@ public class SelectorNode extends CompositeNode{
 		return status;
 	}
 
-	
 	@Override
-	public BehaviorNode prototype() {
+	public BehaviorNode replicate() {
 		List<BehaviorNode> nodes = new ArrayList<BehaviorNode>();
 		for(BehaviorNode n: children){
-			nodes.add(n.prototype());
+			nodes.add(n.replicate());
 		}
 		return new SelectorNode(nodes);
 	}
-
+	
 }

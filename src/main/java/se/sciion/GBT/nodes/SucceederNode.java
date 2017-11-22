@@ -25,8 +25,7 @@ public class SucceederNode extends DecoratorNode{
 	}
 
 	@Override
-	public BehaviorNode prototype() {
-		return new SucceederNode(child.prototype());
+	public BehaviorNode replicate() {
+		return new SucceederNode(child.replicate());
 	}
-
 }
