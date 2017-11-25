@@ -9,7 +9,7 @@ package se.sciion.GBT;
 // for the behaviour. More are possible
 // but for our very simple AI, it's ok.
 
-public enum BehaviorStatus {
+public enum BehaviourStatus {
     UNDEFINED, RUNNING,
     SUCCESS,   FAILURE
 }

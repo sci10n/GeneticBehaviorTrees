@@ -3,20 +3,29 @@ package se.sciion.GBT.nodes;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.sciion.GBT.BehaviorStatus;
+import se.sciion.GBT.BehaviourStatus;
+import se.sciion.GBT.Prototypes;
 
 public class SelectorNode extends CompositeNode{
 
-	public SelectorNode(List<BehaviorNode> nodes) {
+	static {
+		SelectorNode node = new SelectorNode();
+		Prototypes.register(node.getClass().getSimpleName(), node);
+	}
+	
+	public SelectorNode() {
+	}
+	
+	public SelectorNode(List<BehaviourNode> nodes) {
 		super(nodes);
 	}
 
-	public SelectorNode(BehaviorNode... nodes) {
+	public SelectorNode(BehaviourNode... nodes) {
 		super(nodes);
 	}
 
 	@Override
-	protected BehaviorStatus onUpdate() {
+	protected BehaviourStatus onUpdate() {
 		// Nothing to do
 		if(children.isEmpty()) {
 			return status;
@@ -27,7 +36,7 @@ public class SelectorNode extends CompositeNode{
 			status = children.get(currentChild).tick();
 			
 			// We proceed until all children tested
-			if(status == BehaviorStatus.FAILURE && currentChild < children.size()){
+			if(status == BehaviourStatus.FAILURE && currentChild < children.size()){
 				currentChild++;
 				status = onUpdate();
 			}
@@ -36,12 +45,11 @@ public class SelectorNode extends CompositeNode{
 	}
 
 	@Override
-	public BehaviorNode replicate() {
-		List<BehaviorNode> nodes = new ArrayList<BehaviorNode>();
-		for(BehaviorNode n: children){
+	public BehaviourNode replicate() {
+		List<BehaviourNode> nodes = new ArrayList<BehaviourNode>();
+		for(BehaviourNode n: children){
 			nodes.add(n.replicate());
 		}
 		return new SelectorNode(nodes);
 	}
-	
 }

@@ -1,27 +1,32 @@
 package nodes;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import se.sciion.GBT.BehaviourStatus;
+import se.sciion.GBT.Prototypes;
+import se.sciion.GBT.nodes.BehaviourNode;
+import se.sciion.GBT.nodes.LeafNode;
 
-import se.sciion.GBT.BehaviorStatus;
-import se.sciion.GBT.nodes.BehaviorNode;
+public final class SuccessNode extends LeafNode{
 
-@XmlRootElement
-public final class SuccessNode extends BehaviorNode{
-
-	// No mutate available
-	@Override
-	public void mutate() {
-		
+	static {
+		SuccessNode node = new SuccessNode();
+		Prototypes.register(node.getClass().getSimpleName(), node);
 	}
-
+	
 	@Override
-	public BehaviorNode replicate() {
+	public BehaviourNode replicate() {
 		return new SuccessNode();
 	}
 
 	@Override
-	protected BehaviorStatus onUpdate() {
-		status = BehaviorStatus.SUCCESS;
+	protected BehaviourStatus onUpdate() {
+		status = BehaviourStatus.SUCCESS;
 		return status;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof SuccessNode)
+			return true;
+		return false;
 	}
 }

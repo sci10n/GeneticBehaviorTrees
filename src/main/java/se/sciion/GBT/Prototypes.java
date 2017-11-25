@@ -1,32 +1,38 @@
 package se.sciion.GBT;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import se.sciion.GBT.nodes.BehaviorNode;
+import se.sciion.GBT.nodes.BehaviourNode;
 
 public class Prototypes {
 
-	private static Map<String,BehaviorNode> protypes;
+	private static Map<String,BehaviourNode> protypes;
 	
 	static {
-		protypes = new HashMap<String,BehaviorNode>();	
+		protypes = new HashMap<String,BehaviourNode>();	
 	}
 	
-	public static void register(String name, BehaviorNode node){
+	private static int generated = 0;
+	public static void register(String name, BehaviourNode node){
 		// Equals checking
 		if(!protypes.containsKey(name.toLowerCase())){
 			protypes.put(name.toLowerCase(), node);
 		}
 	}
 	
-	public static Map<String,BehaviorNode> getPrototypes() {
+	public static Map<String,BehaviourNode> getPrototypes() {
 		return protypes;
 	}
 	
-	public static BehaviorNode getPrototype(String name){
-		return protypes.get(name.toLowerCase());
+	@SuppressWarnings("unchecked")
+	public static <T extends BehaviourNode> T getPrototype(String name){
+		return (T) protypes.get(name.toLowerCase());
+	}
+	
+	public static BehaviourNode randomPrototype(){
+		generated++;
+		int index = (int) (Math.random() * protypes.size());
+		return (BehaviourNode) protypes.values().toArray()[index];
 	}
 }

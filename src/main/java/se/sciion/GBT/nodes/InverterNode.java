@@ -1,23 +1,33 @@
 package se.sciion.GBT.nodes;
 
-import se.sciion.GBT.BehaviorStatus;
+import se.sciion.GBT.BehaviourStatus;
+import se.sciion.GBT.Prototypes;
 
+// Inverts the status of child node. Only applies to Success and Failure.
 public class InverterNode extends DecoratorNode{
 
-	public InverterNode(BehaviorNode child) {
+	static {
+		InverterNode node = new InverterNode();
+		Prototypes.register(node.getClass().getSimpleName(), node);
+	}
+	
+	public InverterNode() {
+	}
+	
+	public InverterNode(BehaviourNode child) {
 		super(child);
 	}
 
 	@Override
-	protected BehaviorStatus onUpdate() {
-		BehaviorStatus childStatus = child.tick();
+	protected BehaviourStatus onUpdate() {
+		BehaviourStatus childStatus = child.tick();
 		
 		switch(childStatus) {
 		case FAILURE:
-			status = BehaviorStatus.SUCCESS;
+			status = BehaviourStatus.SUCCESS;
 			break;
 		case SUCCESS:
-			status = BehaviorStatus.FAILURE;
+			status = BehaviourStatus.FAILURE;
 			break;
 		case RUNNING:
 		case UNDEFINED:
@@ -28,8 +38,11 @@ public class InverterNode extends DecoratorNode{
 	}
 
 	@Override
-	public BehaviorNode replicate() {
-		return new InverterNode(child.replicate());
+	public BehaviourNode replicate() {
+		if(child != null)
+			return new InverterNode(child.replicate());
+		else
+			return new InverterNode();
 	}
 
 }

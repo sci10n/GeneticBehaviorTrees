@@ -1,21 +1,31 @@
 package se.sciion.GBT.nodes;
 
-import se.sciion.GBT.BehaviorStatus;
+import se.sciion.GBT.BehaviourStatus;
+import se.sciion.GBT.Prototypes;
 
 public class SucceederNode extends DecoratorNode{
 
-	public SucceederNode(BehaviorNode child) {
+	static {
+		SucceederNode node = new SucceederNode();
+		Prototypes.register(node.getClass().getSimpleName(), node);
+	}
+	
+	public SucceederNode() {
+		
+	}
+	
+	public SucceederNode(BehaviourNode child) {
 		super(child);
 	}
 
 	@Override
-	protected BehaviorStatus onUpdate() {
+	protected BehaviourStatus onUpdate() {
 		
-		BehaviorStatus childStatus = child.tick();
+		BehaviourStatus childStatus = child.tick();
 		
 		// We only check for failure since the rest should be the same.
-		if(childStatus == BehaviorStatus.FAILURE) {
-			status = BehaviorStatus.SUCCESS;
+		if(childStatus == BehaviourStatus.FAILURE) {
+			status = BehaviourStatus.SUCCESS;
 		}
 		else {
 			status = childStatus;
@@ -25,7 +35,7 @@ public class SucceederNode extends DecoratorNode{
 	}
 
 	@Override
-	public BehaviorNode replicate() {
+	public BehaviourNode replicate() {
 		return new SucceederNode(child.replicate());
 	}
 }

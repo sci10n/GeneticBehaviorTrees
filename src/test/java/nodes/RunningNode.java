@@ -5,27 +5,27 @@ import se.sciion.GBT.Prototypes;
 import se.sciion.GBT.nodes.BehaviourNode;
 import se.sciion.GBT.nodes.LeafNode;
 
-public class FailNode extends LeafNode{
-
+public class RunningNode extends LeafNode{
+	
 	static {
-		FailNode node = new FailNode();
+		RunningNode node = new RunningNode();
 		Prototypes.register(node.getClass().getSimpleName(), node);
 	}
 	
 	@Override
 	public BehaviourNode replicate() {
-		return new FailNode();
+		return new RunningNode();
 	}
 
 	@Override
 	protected BehaviourStatus onUpdate() {
-		status = BehaviourStatus.FAILURE;
+		status =  BehaviourStatus.RUNNING;
 		return status;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof FailNode)
+		if(obj instanceof RunningNode)
 			return true;
 		return false;
 	}

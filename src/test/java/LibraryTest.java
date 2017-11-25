@@ -6,13 +6,16 @@ import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.transform.stream.StreamResult;
 
 import org.junit.Test;
 
-import se.sciion.GBT.BehaviorStatus;
-import se.sciion.GBT.BehaviorTree;
+import se.sciion.GBT.BehaviourStatus;
+import se.sciion.GBT.BehaviourTree;
 import se.sciion.GBT.Prototypes;
-import se.sciion.GBT.nodes.BehaviorNode;
+import se.sciion.GBT.nodes.BehaviourNode;
+import se.sciion.GBT.nodes.ParallelNode;
+import se.sciion.GBT.nodes.ParallelNode.Policy;
 import se.sciion.GBT.nodes.SelectorNode;
 import nodes.FailNode;
 import nodes.SuccessNode;
@@ -25,29 +28,32 @@ public class LibraryTest {
     	FailNode fail = new FailNode();
     	
     	SelectorNode selector = new SelectorNode(fail,success);
-    	BehaviorTree successTree = new BehaviorTree(selector);
+    	BehaviourTree successTree = new BehaviourTree(selector);
     			
-    	System.out.println(successTree.toString());
+    	//System.out.println(successTree.toString());
     	
-    	assertTrue("Basic tree return success", successTree.tick() == BehaviorStatus.SUCCESS);
+    	assertTrue(successTree.tick() == BehaviourStatus.SUCCESS);
     	
-    	BehaviorTree failTree = new BehaviorTree(new SelectorNode(fail,fail));
+    	BehaviourTree failTree = new BehaviourTree(new SelectorNode(fail,fail));
     	
-    	assertTrue("Basic tree return fail", failTree.tick() == BehaviorStatus.FAILURE);
+    	assertTrue(failTree.tick() == BehaviourStatus.FAILURE);
     	
     }
     
-    @Test public void testTreePrototypeGeneration(){
+    @Test public void testTreeeGeneration(){
     	
     	SuccessNode success = new SuccessNode();
     	FailNode fail = new FailNode();
-    	SelectorNode selector = new SelectorNode(success,fail);
+    	ParallelNode selector = new ParallelNode(Policy.EXIT_ON_FAIL,success,fail);
     	
-    	BehaviorTree tree = new BehaviorTree(selector);
-    	
-    	BehaviorTree treeClone = tree.prototype();
-    	
-    	assertTrue("Assert tree produces Success", tree.tick() == BehaviorStatus.SUCCESS);
-    	assertTrue("Assert tree and cloned tree results in same behaviour", tree.tick() == treeClone.tick());
+    	BehaviourTree tree = new BehaviourTree(selector);
+    	assertTrue(tree.tick() == BehaviourStatus.FAILURE);
     }
+    
+    @Test public void testPrototypeGeneration(){
+    	SuccessNode success = new SuccessNode();
+    	SuccessNode node = Prototypes.getPrototype(success.getClass().getSimpleName());
+    	assertTrue(node.equals(success));
+    }
+    
 }
