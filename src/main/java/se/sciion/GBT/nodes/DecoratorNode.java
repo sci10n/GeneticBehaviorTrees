@@ -32,19 +32,22 @@ public abstract class DecoratorNode extends BehaviourNode {
 
 	@Override
 	public void mutate() {
-		child.mutate();
+		
 	}
 
 	@Override
 	public BehaviourNode randomize() {
 		DEPTH_PRINT+=1;
 		BehaviourNode node = Prototypes.randomPrototype();
+		while(DEPTH_PRINT >= MAX_DEPTH && !(child instanceof LeafNode)){
+			child = Prototypes.randomPrototype();
+		}
 		setChild(node.randomize());
 
 		DEPTH_PRINT-=1;
 		return this;
 	}
-
+	
 	public BehaviourNode getChild() {
 		return child;
 	}

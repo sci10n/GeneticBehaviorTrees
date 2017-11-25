@@ -19,7 +19,7 @@ public abstract class BehaviourNode implements Mutatable, Prototype{
 	private BehaviourNode parent;
 	
 	protected static int DEPTH_PRINT = 0;
-	public static final int MAX_DEPTH = 50;
+	public static final int MAX_DEPTH = 16;
 	
 	public BehaviourNode() {
 		status = BehaviourStatus.UNDEFINED;
@@ -33,7 +33,7 @@ public abstract class BehaviourNode implements Mutatable, Prototype{
 	
 	protected void onExit() {}
 	
-	public BehaviourStatus tick() {
+	public final BehaviourStatus tick() {
 		
 		// Run setup if not running
 		if(status != BehaviourStatus.RUNNING)

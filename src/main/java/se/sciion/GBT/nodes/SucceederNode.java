@@ -36,6 +36,11 @@ public class SucceederNode extends DecoratorNode{
 
 	@Override
 	public BehaviourNode replicate() {
-		return new SucceederNode(child.replicate());
+		if(child != null){
+			return new SucceederNode(child.replicate());
+		}else{
+			return new SucceederNode();
+
+		}
 	}
 }

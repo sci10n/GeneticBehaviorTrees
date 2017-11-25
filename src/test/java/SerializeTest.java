@@ -48,7 +48,7 @@ public class SerializeTest {
 
 		try{
 			tree.randomize();
-			//tree.toXML(new StreamResult(System.out));
+			tree.toXML(new StreamResult(System.out));
 		}catch(StackOverflowError error){
 			error.printStackTrace();
 		}

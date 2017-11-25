@@ -22,6 +22,7 @@ public abstract class CompositeNode extends BehaviourNode {
 	public CompositeNode() {
 		currentChild = 0;
 		children = new ArrayList<BehaviourNode>();
+
 	}
 	
 	public CompositeNode(List<BehaviourNode> nodes) {
@@ -109,9 +110,12 @@ public abstract class CompositeNode extends BehaviourNode {
 	@Override
 	public BehaviourNode randomize() {
 		DEPTH_PRINT+=1;
-		int numChildren = (int) (Math.random() * 15);
+		int numChildren = (int) (Math.random() * 4);
 		for(int i = 0; i <= numChildren; i++){
 			BehaviourNode child = Prototypes.randomPrototype();
+			while(DEPTH_PRINT >= MAX_DEPTH && !(child instanceof LeafNode)){
+				child = Prototypes.randomPrototype();
+			}
 			addChild(child.randomize());
 		}
 		DEPTH_PRINT-= 1;

@@ -46,9 +46,15 @@ public class BehaviourTree {
 	}
 	
 	public void mutate(){
-		root.mutate();
+		ArrayList<BehaviourNode> nodes = new ArrayList<BehaviourNode>();
+		root.getNodes(nodes);
+		nodes.get((int) (Math.random() * nodes.size())).mutate();;
 	}
 	
+	public BehaviourNode getRoot() {
+		return root;
+	}
+
 	// Also known as: Swap random sub-trees
 	public void crossover(BehaviourTree tree){
 		ArrayList<BehaviourNode> n1 = new ArrayList<BehaviourNode>();
