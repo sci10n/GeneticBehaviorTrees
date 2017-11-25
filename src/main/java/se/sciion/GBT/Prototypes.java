@@ -33,6 +33,10 @@ public class Prototypes {
 	public static BehaviourNode randomPrototype(){
 		generated++;
 		int index = (int) (Math.random() * protypes.size());
+		try{
 		return ((BehaviourNode) protypes.values().toArray()[index]).replicate();
+		}catch(ArrayIndexOutOfBoundsException e){
+			return null;
+		}
 	}
 }

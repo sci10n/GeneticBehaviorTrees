@@ -1,4 +1,4 @@
-package nodes;
+package se.sciion.GBT.nodes;
 
 import se.sciion.GBT.BehaviourStatus;
 import se.sciion.GBT.Prototypes;

@@ -1,24 +1,17 @@
+package se.sciion.GBT;
+
 import static org.junit.Assert.assertTrue;
-
-import java.io.StringWriter;
-import java.util.ArrayList;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.transform.stream.StreamResult;
 
 import org.junit.Test;
 
 import se.sciion.GBT.BehaviourStatus;
 import se.sciion.GBT.BehaviourTree;
 import se.sciion.GBT.Prototypes;
-import se.sciion.GBT.nodes.BehaviourNode;
+import se.sciion.GBT.nodes.FailNode;
 import se.sciion.GBT.nodes.ParallelNode;
 import se.sciion.GBT.nodes.ParallelNode.Policy;
 import se.sciion.GBT.nodes.SelectorNode;
-import nodes.FailNode;
-import nodes.SuccessNode;
+import se.sciion.GBT.nodes.SuccessNode;
 
 public class LibraryTest {
     @Test public void testBasicTreeConstruction() {

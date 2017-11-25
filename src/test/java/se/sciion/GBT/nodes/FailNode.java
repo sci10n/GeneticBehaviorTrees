@@ -1,31 +1,32 @@
-package nodes;
+package se.sciion.GBT.nodes;
 
 import se.sciion.GBT.BehaviourStatus;
 import se.sciion.GBT.Prototypes;
 import se.sciion.GBT.nodes.BehaviourNode;
 import se.sciion.GBT.nodes.LeafNode;
 
-public class RunningNode extends LeafNode{
-	
+public class FailNode extends LeafNode{
+
 	static {
-		RunningNode node = new RunningNode();
+		FailNode node = new FailNode();
+		System.out.println(node);
 		Prototypes.register(node.getClass().getSimpleName(), node);
 	}
 	
 	@Override
 	public BehaviourNode replicate() {
-		return new RunningNode();
+		return new FailNode();
 	}
 
 	@Override
 	protected BehaviourStatus onUpdate() {
-		status =  BehaviourStatus.RUNNING;
+		status = BehaviourStatus.FAILURE;
 		return status;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof RunningNode)
+		if(obj instanceof FailNode)
 			return true;
 		return false;
 	}

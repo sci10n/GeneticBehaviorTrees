@@ -8,6 +8,7 @@ import org.w3c.dom.Element;
 import se.sciion.GBT.BehaviourStatus;
 import se.sciion.GBT.Mutatable;
 import se.sciion.GBT.Prototype;
+import se.sciion.GBT.Prototypes;
 
 /**
  * @author sciion
@@ -23,6 +24,7 @@ public abstract class BehaviourNode implements Mutatable, Prototype{
 	
 	public BehaviourNode() {
 		status = BehaviourStatus.UNDEFINED;
+		Prototypes.register(getClass().getSimpleName(), this);
 	}
 
 	protected void onStart() {
@@ -61,20 +63,7 @@ public abstract class BehaviourNode implements Mutatable, Prototype{
 	 * Flattens the tree such that crossover can be done easier.
 	 * @param nodes array where the nodes will be stored
 	 */
-	public void getNodes(List<BehaviourNode> nodes) {
-		nodes.add(this);
-	}
-	
-	@Override
-	public void mutate() {
-		
-	}
-	
-	@Override
-	public BehaviourNode randomize() {
-		return this;
-	}
-	
+	public abstract void  getNodes(List<BehaviourNode> nodes);
 	// Only work with trivial classes
 	public Element toXML(Document doc){
 		Element e = doc.createElement(getClass().getSimpleName());

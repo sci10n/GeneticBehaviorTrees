@@ -103,8 +103,6 @@ public abstract class CompositeNode extends BehaviourNode {
 			int randomChild2 = (int) (Math.random() * children.size());
 			replaceChild(children.get(randomChild), children.get(randomChild2));
 		}
-		
-		super.mutate();
 	}
 	
 	@Override
